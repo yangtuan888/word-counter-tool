@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>在线字数统计工具 - 免费字符计数 | 你的工具名</title>
+    <meta name="description" content="免费在线字数统计工具，实时统计中文字符、英文字母、数字、标点符号，支持复制清空，适用于SEO和写作。">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #f5f7fb;
+            margin: 0;
+            padding: 20px;
+            color: #1e293b;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+            overflow: hidden;
+            padding: 24px 20px 32px;
+        }
+        h1 {
+            font-size: 1.8rem;
+            margin-top: 0;
+            margin-bottom: 0.25rem;
+            font-weight: 600;
+        }
+        .sub {
+            color: #475569;
+            border-left: 4px solid #3b82f6;
+            padding-left: 12px;
+            margin: 16px 0 24px 0;
+            font-size: 0.95rem;
+        }
+        textarea {
+            width: 100%;
+            height: 240px;
+            padding: 16px;
+            font-size: 1rem;
+            font-family: inherit;
+            border: 1px solid #cbd5e1;
+            border-radius: 20px;
+            resize: vertical;
+            background: #fefefe;
+            transition: 0.2s;
+        }
+        textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 12px;
+            margin: 24px 0 20px;
+        }
+        .stat-card {
+            background: #f8fafc;
+            border-radius: 20px;
+            padding: 12px 8px;
+            text-align: center;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+        }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #0f172a;
+            line-height: 1.2;
+        }
+        .stat-label {
+            font-size: 0.8rem;
+            color: #334155;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .button-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        button {
+            background: #eef2ff;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.2s;
+            color: #1e40af;
+        }
+        button.primary {
+            background: #3b82f6;
+            color: white;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        button.primary:hover {
+            background: #2563eb;
+        }
+        button:hover {
+            background: #e2e8f0;
+        }
+        hr {
+            margin: 28px 0 20px;
+            border: none;
+            height: 1px;
+            background: #e2e8f0;
+        }
+        footer {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #94a3b8;
+            margin-top: 24px;
+        }
+        /* AdSense 广告容器（示例） */
+        .ad-container {
+            text-align: center;
+            margin: 20px 0 10px;
+            min-height: 100px;
+            background: #f1f5f9;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #64748b;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 16px;
+            }
+            .stat-number {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>📝 在线字数统计工具</h1>
+    <div class="sub">实时统计 · 中文字符优先 · 支持清除/复制</div>
+
+    <!-- 可选 AdSense 广告位 (顶部) -->
+    <div class="ad-container" id="ad-top">
+        <!-- 此处粘贴 Google AdSense 代码 -->
+        广告位 —— 上线后替换为 AdSense 代码
+    </div>
+
+    <textarea id="textInput" placeholder="在这里粘贴或输入文字，将自动统计字数..."></textarea>
+
+    <div class="stats">
+        <div class="stat-card"><div class="stat-number" id="totalChars">0</div><div class="stat-label">总字符数</div></div>
+        <div class="stat-card"><div class="stat-number" id="chineseChars">0</div><div class="stat-label">中文字符</div></div>
+        <div class="stat-card"><div class="stat-number" id="letters">0</div><div class="stat-label">英文字母</div></div>
+        <div class="stat-card"><div class="stat-number" id="digits">0</div><div class="stat-label">数字</div></div>
+        <div class="stat-card"><div class="stat-number" id="punctuation">0</div><div class="stat-label">标点符号</div></div>
+        <div class="stat-card"><div class="stat-number" id="words">0</div><div class="stat-label">英文单词数</div></div>
+    </div>
+
+    <div class="button-group">
+        <button id="clearBtn" class="primary">🗑️ 清空</button>
+        <button id="copyBtn">📋 复制文本</button>
+    </div>
+
+    <!-- 可选 AdSense 广告位 (底部) -->
+    <div class="ad-container" id="ad-bottom">
+        广告位 —— 上线后替换为 AdSense 代码
+    </div>
+    <footer>完全本地统计，不上传任何内容，保护隐私。</footer>
+</div>
+
+<script>
+    function countStats(str) {
+        // 总字符数
+        const totalChars = str.length;
+        
+        // 中文字符 (Unicode 4E00-9FFF基本汉字)
+        const chineseMatch = str.match(/[\u4e00-\u9fff]/g);
+        const chineseChars = chineseMatch ? chineseMatch.length : 0;
+        
+        // 英文字母 A-Z a-z
+        const lettersMatch = str.match(/[A-Za-z]/g);
+        const letters = lettersMatch ? lettersMatch.length : 0;
+        
+        // 数字 0-9
+        const digitsMatch = str.match(/[0-9]/g);
+        const digits = digitsMatch ? digitsMatch.length : 0;
+        
+        // 标点符号: 常用的中英文标点，但不包含字母数字汉字空格
+        const punctuationMatch = str.match(/[！？。，；：”“’‘！？｡。＂＃＄％＆＇（）＊＋，－／：；＜＝＞＠［＼］＾＿｀｛｜｝～！@#￥%……&*（）——+【】{}；：""''《》？,.?;:'"`~]/g);
+        const punctuation = punctuationMatch ? punctuationMatch.length : 0;
+        
+        // 英文单词数 (按空格/标点分割，过滤空字符)
+        const wordsMatch = str.match(/\b[a-zA-Z]+(?:['-][a-zA-Z]+)*\b/g);
+        const words = wordsMatch ? wordsMatch.length : 0;
+        
+        return { totalChars, chineseChars, letters, digits, punctuation, words };
+    }
+    
+    function updateStats() {
+        const text = document.getElementById('textInput').value;
+        const stats = countStats(text);
+        document.getElementById('totalChars').innerText = stats.totalChars;
+        document.getElementById('chineseChars').innerText = stats.chineseChars;
+        document.getElementById('letters').innerText = stats.letters;
+        document.getElementById('digits').innerText = stats.digits;
+        document.getElementById('punctuation').innerText = stats.punctuation;
+        document.getElementById('words').innerText = stats.words;
+    }
+    
+    const textarea = document.getElementById('textInput');
+    textarea.addEventListener('input', updateStats);
+    
+    document.getElementById('clearBtn').addEventListener('click', () => {
+        textarea.value = '';
+        updateStats();
+        textarea.focus();
+    });
+    
+    document.getElementById('copyBtn').addEventListener('click', async () => {
+        if (!textarea.value) {
+            alert('没有内容可复制');
+            return;
+        }
+        try {
+            await navigator.clipboard.writeText(textarea.value);
+            alert('✅ 已复制到剪贴板');
+        } catch (err) {
+            alert('复制失败，请手动选择复制');
+        }
+    });
+    
+    // 初始统计
+    updateStats();
+</script>
+</body>
+</html>
