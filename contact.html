@@ -3,53 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>联系我们 - 在线字数统计工具</title>
-    <meta name="description" content="通过邮件联系我们，反馈问题或合作建议。">
+    <title>联系我们 - 在线工具箱</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&display=swap" rel="stylesheet">
     <style>
-        * { box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background: #f5f7fb;
-            margin: 0;
-            padding: 20px;
+            font-family: 'Inter', system-ui, sans-serif;
+            background: linear-gradient(145deg, #f0f4ff 0%, #e6edfc 100%);
+            min-height: 100vh;
+            padding: 2rem 1rem;
             color: #1e293b;
         }
-        .container {
-            max-width: 900px;
+        .glass-card {
+            max-width: 800px;
             margin: 0 auto;
-            background: white;
-            border-radius: 24px;
-            padding: 24px 20px 32px;
-            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 2rem;
+            box-shadow: 0 25px 45px -12px rgba(0,0,0,0.25);
+            border: 1px solid rgba(255,255,255,0.4);
+            overflow: hidden;
         }
         .nav {
             display: flex;
-            gap: 20px;
             justify-content: center;
-            margin-bottom: 30px;
-            background: white;
-            padding: 12px;
-            border-radius: 60px;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            gap: 2rem;
+            padding: 1rem 1.5rem;
+            background: rgba(255,255,255,0.6);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            flex-wrap: wrap;
         }
         .nav a {
             text-decoration: none;
             color: #334155;
             font-weight: 500;
+            padding: 0.3rem 0;
+            border-bottom: 2px solid transparent;
         }
-        .nav a:hover { color: #3b82f6; }
-        h1 { font-size: 1.8rem; margin-bottom: 0.5rem; }
-        .content { line-height: 1.6; color: #334155; }
-        .contact-email {
-            background: #f8fafc;
-            padding: 20px;
-            border-radius: 20px;
+        .nav a:hover { color: #3b82f6; border-bottom-color: #3b82f6; }
+        .content { padding: 2rem; }
+        h1 { font-size: 1.8rem; font-weight: 700; background: linear-gradient(135deg,#1e293b,#3b82f6); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 1rem; }
+        .contact-box {
+            background: rgba(255,255,255,0.6);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
             text-align: center;
-            margin: 30px 0;
-            font-size: 1.2rem;
+            margin: 1.5rem 0;
         }
         .email-link {
             font-size: 1.4rem;
@@ -58,50 +57,42 @@
             text-decoration: none;
             word-break: break-all;
         }
-        .email-link:hover { text-decoration: underline; }
         footer {
             text-align: center;
-            font-size: 0.75rem;
-            color: #94a3b8;
-            margin-top: 40px;
-            padding-top: 20px;
+            font-size: 0.7rem;
+            color: #62748c;
+            padding: 1rem;
             border-top: 1px solid #e2e8f0;
+            margin-top: 1rem;
         }
         .note {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: #64748b;
-            text-align: center;
         }
     </style>
 </head>
 <body>
-<div class="container">
+<div class="glass-card">
     <div class="nav">
         <a href="/">Home</a>
         <a href="/about.html">About</a>
         <a href="/privacy.html">Privacy Policy</a>
         <a href="/contact.html">Contact</a>
     </div>
-    <h1>📧 联系我们</h1>
     <div class="content">
+        <h1>📧 联系我们</h1>
         <p>如果您有任何问题、建议或合作意向，请通过以下邮箱与我们联系。我们会尽快回复（通常在 2 个工作日内）。</p>
-        
-        <div class="contact-email">
+        <div class="contact-box">
             📩 电子邮箱：<br>
-            <a href="mailto:yangtuan888@gmail.com" class="email-link">yangtuan888@gmail.com</a>
+            <a href="mailto:your-email@example.com" class="email-link">your-email@example.com</a>
         </div>
-
-        <p style="text-align:center;">🔁 请将上述邮箱地址中的 `your-email@example.com` 替换为您实际使用的联系邮箱。</p>
-        
-        <p>📌 温馨提示：</p>
-        <ul>
-            <li>反馈工具使用问题：请尽量描述操作步骤、浏览器版本，并附上截图（如有）。</li>
-            <li>广告合作：欢迎洽谈，但目前我们主要以 Google AdSense 变现，暂不接受直接广告购买。</li>
-            <li>版权/隐私问题：如有涉及您的内容或隐私疑虑，请提供相关证明，我们会认真处理。</li>
-        </ul>
-        <p class="note">注意：为了保护您的隐私，请不要在邮件中包含敏感个人信息（如身份证号、银行账号）。</p>
+        <p class="note">⚠️ 请将上述邮箱替换为您实际使用的邮箱（例如 yourname@gmail.com）。</p>
+        <p><strong>温馨提示：</strong><br>
+        - 反馈工具问题：请尽量描述操作步骤和浏览器版本。<br>
+        - 广告合作：我们主要通过 Google AdSense 变现，暂不接受直接广告购买。<br>
+        - 隐私相关：如有涉及您的隐私疑虑，请提供相关证明，我们会认真处理。</p>
     </div>
-    <footer>© 2025 在线字数统计工具 | 感谢您的支持</footer>
+    <footer>© 2025 在线工具箱 | 感谢您的支持</footer>
 </div>
 </body>
 </html>
