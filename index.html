@@ -120,7 +120,6 @@
             color: #94a3b8;
             margin-top: 24px;
         }
-        /* AdSense 广告容器（示例） */
         .ad-container {
             text-align: center;
             margin: 20px 0 10px;
@@ -132,6 +131,28 @@
             justify-content: center;
             font-size: 12px;
             color: #64748b;
+        }
+        /* 导航栏样式 */
+        .nav {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 20px;
+            background: white;
+            padding: 12px;
+            border-radius: 60px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .nav a {
+            text-decoration: none;
+            color: #334155;
+            font-weight: 500;
+        }
+        .nav a:hover {
+            color: #3b82f6;
         }
         @media (max-width: 600px) {
             .container {
@@ -145,13 +166,20 @@
 </head>
 <body>
 <div class="container">
+    <!-- 简单导航 -->
+    <div class="nav">
+        <a href="/">Home</a>
+        <a href="/about.html">About</a>
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/contact.html">Contact</a>
+    </div>
+
     <h1>📝 在线字数统计工具</h1>
     <div class="sub">实时统计 · 中文字符优先 · 支持清除/复制</div>
 
-    <!-- 可选 AdSense 广告位 (顶部) -->
+    <!-- 广告位顶部 -->
     <div class="ad-container" id="ad-top">
-        <!-- 此处粘贴 Google AdSense 代码 -->
-        广告位 —— 上线后替换为 AdSense 代码
+        广告位 — 上线后替换为 AdSense 代码
     </div>
 
     <textarea id="textInput" placeholder="在这里粘贴或输入文字，将自动统计字数..."></textarea>
@@ -170,43 +198,32 @@
         <button id="copyBtn">📋 复制文本</button>
     </div>
 
-    <!-- 可选 AdSense 广告位 (底部) -->
+    <!-- 广告位底部 -->
     <div class="ad-container" id="ad-bottom">
-        广告位 —— 上线后替换为 AdSense 代码
+        广告位 — 上线后替换为 AdSense 代码
     </div>
     <footer>完全本地统计，不上传任何内容，保护隐私。</footer>
 </div>
 
 <script>
     function countStats(str) {
-        // 总字符数
         const totalChars = str.length;
-        
-        // 中文字符 (Unicode 4E00-9FFF基本汉字)
         const chineseMatch = str.match(/[\u4e00-\u9fff]/g);
         const chineseChars = chineseMatch ? chineseMatch.length : 0;
-        
-        // 英文字母 A-Z a-z
         const lettersMatch = str.match(/[A-Za-z]/g);
         const letters = lettersMatch ? lettersMatch.length : 0;
-        
-        // 数字 0-9
         const digitsMatch = str.match(/[0-9]/g);
         const digits = digitsMatch ? digitsMatch.length : 0;
-        
-        // 标点符号: 常用的中英文标点，但不包含字母数字汉字空格
         const punctuationMatch = str.match(/[！？。，；：”“’‘！？｡。＂＃＄％＆＇（）＊＋，－／：；＜＝＞＠［＼］＾＿｀｛｜｝～！@#￥%……&*（）——+【】{}；：""''《》？,.?;:'"`~]/g);
         const punctuation = punctuationMatch ? punctuationMatch.length : 0;
-        
-        // 英文单词数 (按空格/标点分割，过滤空字符)
         const wordsMatch = str.match(/\b[a-zA-Z]+(?:['-][a-zA-Z]+)*\b/g);
         const words = wordsMatch ? wordsMatch.length : 0;
-        
         return { totalChars, chineseChars, letters, digits, punctuation, words };
     }
     
+    const textarea = document.getElementById('textInput');
     function updateStats() {
-        const text = document.getElementById('textInput').value;
+        const text = textarea.value;
         const stats = countStats(text);
         document.getElementById('totalChars').innerText = stats.totalChars;
         document.getElementById('chineseChars').innerText = stats.chineseChars;
@@ -215,30 +232,19 @@
         document.getElementById('punctuation').innerText = stats.punctuation;
         document.getElementById('words').innerText = stats.words;
     }
-    
-    const textarea = document.getElementById('textInput');
     textarea.addEventListener('input', updateStats);
-    
     document.getElementById('clearBtn').addEventListener('click', () => {
         textarea.value = '';
         updateStats();
         textarea.focus();
     });
-    
     document.getElementById('copyBtn').addEventListener('click', async () => {
-        if (!textarea.value) {
-            alert('没有内容可复制');
-            return;
-        }
+        if (!textarea.value) { alert('没有内容可复制'); return; }
         try {
             await navigator.clipboard.writeText(textarea.value);
             alert('✅ 已复制到剪贴板');
-        } catch (err) {
-            alert('复制失败，请手动选择复制');
-        }
+        } catch(err) { alert('复制失败，请手动选择复制'); }
     });
-    
-    // 初始统计
     updateStats();
 </script>
 </body>
